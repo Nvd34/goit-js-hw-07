@@ -1,24 +1,31 @@
-function getRandomHexColor() {
-  return `#${Math.floor(Math.random() * 16777215)
-    .toString(16)
-    .padStart(6, 0)}`;
-}
-// function getRandomHexColor() {
-//     return `#${Math.floor(Math.random() * 16777215).toString(16).padStart(6, '0')}`;
-//   }
 
-  function changeBackgroundColor() {
-    const body = document.body;
-    const colorSpan = document.querySelector('.color');
 
-    // Генеруємо випадковий колір
-    const randomColor = getRandomHexColor();
+  function getRandomHexColor() {
+      return `#${Math.floor(Math.random() * 16777215)
+        .toString(16)
+        .padStart(6, '0')}`;
+    }
 
-    // Змінюємо фон <body>
-    body.style.backgroundColor = randomColor;
+    function changeBackgroundColor() {
+      const body = document.body;
+      const colorSpan = document.querySelector('.color');
 
-    // Встановлюємо текстовий вміст для span.color
-    colorSpan.textContent = randomColor;
+      const randomColor = getRandomHexColor();
 
-    // Опціонально: можна також додати анімацію зміни кольору
-  }
+      body.style.backgroundColor = randomColor;
+      colorSpan.textContent = randomColor;
+
+  
+      const textColor = getContrastColor(randomColor);
+      body.style.color = textColor;
+    }
+
+    function getContrastColor(hexColor) {
+      const r = parseInt(hexColor.slice(1, 3), 16);
+      const g = parseInt(hexColor.slice(3, 5), 16);
+      const b = parseInt(hexColor.slice(5, 7), 16);
+
+      const brightness = (r * 299 + g * 587 + b * 114) / 1000;
+
+      return brightness > 128 ? '#000' : '#fff';
+    }
