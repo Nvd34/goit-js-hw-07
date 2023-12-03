@@ -1,26 +1,27 @@
 
-  
 
-    function submitForm(event) {
-      event.preventDefault();
+    document.addEventListener('DOMContentLoaded', function () {
+      const loginForm = document.querySelector('.login-form');
 
-      const form = event.target;
-      const emailInput = form.elements.email;
-      const passwordInput = form.elements.password;
+      loginForm.addEventListener('submit', function (event) {
+        event.preventDefault(); 
 
-      const emailValue = emailInput.value.trim();
-      const passwordValue = passwordInput.value.trim();
+        const emailInput = loginForm.elements['email'];
+        const passwordInput = loginForm.elements['password'];
 
-      if (emailValue === '' || passwordValue === '') {
-        alert('All form fields must be filled in');
-      } else {
-        const formData = {
-          email: emailValue,
-          password: passwordValue,
-        };
+        const emailValue = emailInput.value.trim();
+        const passwordValue = passwordInput.value.trim();
 
-        console.log(formData);
+        if (!emailValue || !passwordValue) {
+          alert('All form fields must be filled in');
+        } else {
+          const formData = {
+            email: emailValue,
+            password: passwordValue
+          };
 
-        form.reset();
-      }
-    }
+          console.log(formData);
+          loginForm.reset();
+        }
+      });
+    });
