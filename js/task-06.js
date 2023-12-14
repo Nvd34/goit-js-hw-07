@@ -6,22 +6,22 @@ function getRandomHexColor() {
 
      
 
-
-  function createBoxes(amount) {
-    const boxesContainer = document.getElementById('boxes');
-
-    const boxesHTML = Array.from({ length: amount }).reduce((html, _, i) => {
-      const size = 30 + i * 10;
-      const color = getRandomHexColor();
-
-    
-      html += `<div style="width:${size}px; height:${size}px; background-color:${color};"></div>`;
-      return html;
-    }, '');
-
+function createBoxes(amount) {
+  const boxesContainer = document.getElementById('boxes');
  
-    boxesContainer.insertAdjacentHTML('beforeend', boxesHTML);
-  }
+  boxesContainer.innerHTML = '';
+
+  const boxesHTML = Array.from({ length: amount }).reduce((html, _, i) => {
+    const size = 30 + i * 10;
+    const color = getRandomHexColor();
+
+    html += `<div style="width:${size}px; height:${size}px; background-color:${color};"></div>`;
+    return html;
+  }, '');
+
+  
+  boxesContainer.innerHTML = boxesHTML;
+}
 
 
   function destroyBoxes() {
